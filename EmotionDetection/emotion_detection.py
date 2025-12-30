@@ -2,6 +2,21 @@ import requests
 import json
 
 def emotion_detector(text_to_analyse: str) -> dict:
+    """
+    Analyzes the emotional content of a given string using the Watson NLP service.
+
+    This function sends a POST request to an external API to predict emotions 
+    (anger, disgust, fear, joy, sadness) and identifies the dominant emotion.
+
+    Args:
+        text_to_analyse (str): The input text string to be processed for emotions.
+
+    Returns:
+        dict: A dictionary containing scores for each emotion and the 
+              'dominant_emotion'. If the API returns an error (400), 
+              all values will be set to None.
+    """
+    
     url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
     header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
     myobj = { "raw_document": { "text": text_to_analyse } }
