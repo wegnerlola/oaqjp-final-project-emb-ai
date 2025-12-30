@@ -10,7 +10,9 @@ def sent_analyzer():
 
     # Pass the text to the emotion_detector function and store the response
     response = emotion_detector(text_to_analyze)
-
+    if response.get('dominant_emotion') is None:
+        return 'Invalid text! Please try again!'
+    
     return "For the given statement, the system response is 'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy} and 'sadness': {sadness}. The dominant emotion is {dominant_emotion}.".format(**response)
 
 @app.route("/")
